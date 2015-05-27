@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml "piwik/defaults.yaml" as default_settings %}
+
+{## setup variable using grains['os_family'] based logic ##}
+{% set os_family_map = salt['grains.filter_by']({
+    'Debian': {
+        'repo_file': '/etc/apt/sources.list.d/piwik.list',
+        'pkg_repo': 'deb http://debian.piwik.org/ piwik main',
+        'key_url': 'https://debian.piwik.org/repository.gpg',
+    },
+  }
+  ,grain="os_family"
+  ,merge=salt['pillar.get']('piwik:lookup'))
+%}
+
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.piwik.update(os_family_map) %}
+
+{## Merge in piwik:lookup pillar ##}
+{% set piwik = salt['pillar.get'](
+        'piwik',
+        default=default_settings.piwik,
+        merge=True
+    )
+%}

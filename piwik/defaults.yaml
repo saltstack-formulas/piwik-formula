@@ -1,4 +1,8 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
 piwik:
+  pkg: piwik
+
   db_host: localhost
   db_name: piwik
   db_user: piwik
