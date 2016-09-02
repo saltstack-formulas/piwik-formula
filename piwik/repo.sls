@@ -3,6 +3,7 @@
 #
 {% from "piwik/map.jinja" import piwik with context %}
 
+{% if not piwik.install_from_source %}
 {% if grains['os_family'] == 'Debian' %}
 piwik-repo:
   pkgrepo.managed:
@@ -13,4 +14,4 @@ piwik-repo:
     - require_in:
       - pkg: {{ piwik.pkg }}
 {%- endif %}
-
+{%- endif %}

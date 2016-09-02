@@ -11,6 +11,9 @@
         'pkg_repo': 'deb http://debian.piwik.org/ piwik main',
         'key_url': 'https://debian.piwik.org/repository.gpg',
     },
+    'RedHat': {
+        'install_from_source': True,
+    },
   }
   ,grain="os_family"
   ,merge=salt['pillar.get']('piwik:lookup'))
