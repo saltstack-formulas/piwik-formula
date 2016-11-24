@@ -2,6 +2,12 @@
 # vim: ft=yaml
 piwik:
   pkg: piwik
+  install_from_source: False
+  install_dir: /usr/share/piwik
+  web_user: root
+  url: https://builds.piwik.org/piwik.zip
+  asc_url: https://builds.piwik.org/piwik.zip.asc
+  gpg_key_id: 5590A237
 
   db_host: localhost
   db_name: piwik
